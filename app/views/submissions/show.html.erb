@@ -16,13 +16,27 @@ Points: <%= @submission.total_upvotes %>
 
 <h3>Comments: ( <%= @submission.comments.count %> )</h3>
 <br>
-<% @submission.comments.each do |comment| %>
-  <%= comment.body %>
+
+<%= form_tag("/comments", :method=> :post) do %>
+  <textarea name="comment[body]"></textarea>
+  <input type="hidden" name=comment[author_id]
+    value="">
+  <input type="hidden" name=comment[submission_id]
+    value="<%= @submission.id %>">
   <br>
-  <em>Posted by <%= link_to comment.author.username, comment.author %> <%= "#{time_ago_in_words(@submission.created_at)} ago" %></em>
+  <input type="submit" value ="Post Comment" class="btn btn-primary">
+<% end %>
+<br>
+<br>
+<% @submission.comments.each do |comment| %>
+  <div class="well well-small">
+    <%= comment.body %>
+    <br>
+    <em>Posted by <%= link_to comment.author.username, comment.author %> <%=  "#{time_ago_in_words(@submission.created_at)} ago" %></em> -
+    <%= link_to "Reply", new_submission_comment_path(@submission) %>
+  </div>
 
 <% end %>
 
-<!-- Insert proper comment layout. Set up ancestors -->
 
 
