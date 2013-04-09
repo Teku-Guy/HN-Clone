@@ -1,6 +1,6 @@
 module SessionsHelper
-  def log_in(email, password)
-    user = User.find_by_email(email)
+  def log_in(username, password)
+    user = User.find_by_username(username)
     if password == user.password
       user.remember_token = SecureRandom.hex(16)
       user.save!

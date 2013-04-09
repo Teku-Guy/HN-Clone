@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def create
      if log_in(params[:user][:username], params[:user][:password])
-       redirect_to root_url
+       redirect_to submissions_url
      else
        render :new
      end
@@ -9,8 +9,7 @@ class SessionsController < ApplicationController
 
   def destroy
    log_out
-   empty_cart
-   redirect_to root_url
+   redirect_to new_user_url
   end
 
   def new

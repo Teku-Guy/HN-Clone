@@ -1,0 +1,23 @@
+<h1>All Submissions</h1>
+
+<table class="table table-striped">
+  <tr>
+    <td>Submssion Title</td>
+    <td>Author</td>
+    <td>Points</td>
+    <td>Submission Time</td>
+    <td>Comments</td>
+  </tr>
+    <% @submissions.reverse_each do |sub| %>
+      <tr align="center">
+        <td><%= link_to sub.title, sub.url %></td>
+        <td><%= link_to sub.user.username, sub.user %></td>
+        <td><%= sub.total_upvotes %></td>
+        <td><%= "#{time_ago_in_words(sub.created_at)} ago" %></td>
+        <td><%= link_to sub.comments.count, sub %></td>
+      </tr>
+    <% end %>
+</table>
+
+<br>
+<%= link_to "Add new submission", new_submission_path, class: "btn" %>

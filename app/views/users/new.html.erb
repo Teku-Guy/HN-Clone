@@ -1,0 +1,21 @@
+<h1>Create a user</h1>
+
+<%= form_for @user do |f| %>
+  <%= f.label(:username) %>
+  <%= f.text_field(:username) %>
+  <br>
+  <%= f.label(:password) %>
+  <%= f.password_field(:password) %>
+  <br>
+  <br>
+  You may add up to 3 emails.
+  <br>
+  <%= f.fields_for(:emails) do |email_form| %>
+  <br>
+    <%= email_form.label(:email, "Email")%>
+    <%= email_form.text_field(:email) %>
+  <% end %>
+  <br>
+  <br>
+  <%= f.submit %>
+<% end %>

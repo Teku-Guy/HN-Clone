@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    3.times { @user.emails.build }
   end
 
   def create
@@ -9,10 +10,17 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:success] = "Account successfully created"
-      redirect_to submissions_path
+      redirect_to new_session_path
     else
       flash[:error] = "There were some errors creating your account"
       render :new
     end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:success] = "Account successfully deleted"
+    redirect_to submissions_path
   end
 end

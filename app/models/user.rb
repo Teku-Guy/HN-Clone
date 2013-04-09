@@ -11,10 +11,19 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :username, :password, :karma
+  attr_accessible :username, :password, :karma, :emails_attributes
 
   has_many :submissions
   has_many :comments
   has_many :thread_upvotes
+
   has_many :emails
+  accepts_nested_attributes_for :emails, :reject_if => :all_blank
+
+  validates :username, :presence => true, :uniqueness => true
+
+  def add_karma
+    self.karma += 1
+    self.save
+  end
 end

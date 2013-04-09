@@ -1,0 +1,18 @@
+<h1>Add a submission</h1>
+<%= form_for @submission do |f| %>
+  <%= f.label(:title) %>
+  <%= f.text_field(:title) %>
+  <br>
+  <%= f.label(:url) %>
+  <%= f.text_field :url, :value => "http://" %>
+  <br>
+    <%= f.fields_for(:comments) do |comment_form| %>
+      <%= comment_form.label(:body, "Comment") %>
+      <%= comment_form.text_area :body, :size => "30x5" %>
+      <%= comment_form.hidden_field :author_id, :value => current_user.id %>
+    <% end %>
+  <br>
+  <input type="hidden" name="submission[user_id]"
+    value="<%= current_user.id %>" />
+  <%= f.submit class: "btn btn-large" %>
+<% end %>

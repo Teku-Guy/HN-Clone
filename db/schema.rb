@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409164817) do
+ActiveRecord::Schema.define(:version => 20130409173609) do
 
   create_table "comments", :force => true do |t|
     t.text     "body"
@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(:version => 20130409164817) do
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "password"
-    t.integer  "karma"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "karma",          :default => 0
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "remember_token"
   end
 

@@ -13,4 +13,6 @@ class Email < ActiveRecord::Base
   attr_accessible :user_id, :email
 
   belongs_to :user
+
+  validates :email, :presence => true, :uniqueness => true
 end
