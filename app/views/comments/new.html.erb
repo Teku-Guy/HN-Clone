@@ -1,0 +1,13 @@
+<h1> Post a reply to </h1>
+
+<%= form_tag("/comments", :method=> :post) do %>
+  <textarea name="comment[body]"></textarea>
+  <input type="hidden" name=comment[author_id]
+    value="<%= current_user.id %>">
+  <input type="hidden" name=comment[parent_id]
+      value="<%= params[:comment_id] %>">
+  <input type="hidden" name=comment[submission_id]
+    value="<%= params[:submission_id] %>">
+  <br>
+  <input type="submit" value ="Post Comment" class="btn btn-primary">
+<% end %>

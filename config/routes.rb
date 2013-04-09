@@ -7,7 +7,9 @@ Hnclone::Application.routes.draw do
   resources :users, :only => [:new, :create, :destroy]
 
   resources :submissions do
-    resources :comments
+    resources :comments do
+      resources :comments
+    end
     post "upvote"
     post "remove_upvote"
   end

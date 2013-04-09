@@ -20,7 +20,7 @@ Points: <%= @submission.total_upvotes %>
 <%= form_tag("/comments", :method=> :post) do %>
   <textarea name="comment[body]"></textarea>
   <input type="hidden" name=comment[author_id]
-    value="">
+    value="<%= current_user.id %>">
   <input type="hidden" name=comment[submission_id]
     value="<%= @submission.id %>">
   <br>
@@ -33,7 +33,7 @@ Points: <%= @submission.total_upvotes %>
     <%= comment.body %>
     <br>
     <em>Posted by <%= link_to comment.author.username, comment.author %> <%=  "#{time_ago_in_words(@submission.created_at)} ago" %></em> -
-    <%= link_to "Reply", new_submission_comment_path(@submission) %>
+    <%= link_to "Reply", new_submission_comment_comment_url(@submission, comment) %>
   </div>
 
 <% end %>
