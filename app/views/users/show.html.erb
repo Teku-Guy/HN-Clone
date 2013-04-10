@@ -1,0 +1,28 @@
+<h1> <%= @user.username %> </h1>
+
+<b>SignUp Date:</b> <%= @user.created_at.to_date %>
+<br>
+<br>
+<ul>
+  <% @user.emails.each do |email| %>
+  <li> <%= email.email %> </li>
+  <% end %>
+</ul>
+<br>
+
+<table class="table table-striped">
+  <tr>
+    <td>Submssion Title</td>
+    <td>Points</td>
+    <td>Submission Time</td>
+    <td>Comments</td>
+  </tr>
+    <% @user.submissions.reverse_each do |sub| %>
+      <tr align="center">
+        <td><%= link_to sub.title, sub.url %></td>
+        <td><%= sub.total_upvotes %></td>
+        <td><%= "#{time_ago_in_words(sub.created_at)} ago" %></td>
+        <td><%= link_to sub.comments.count, sub %></td>
+      </tr>
+    <% end %>
+</table>

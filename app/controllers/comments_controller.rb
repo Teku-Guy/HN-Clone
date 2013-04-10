@@ -16,12 +16,16 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
 
     if @comment.save
+      comment = @comment.dup
 
-      new_ca = CommentAncestor.create!(:ancestor_id => @comment.parent_id,
-                              :comment_id => @comment.id)
-      ca = CommentAncestor.find(new_ca.ancestor_id)
-      ca.descendant_id = new_ca.id
-      ca.save!
+    until comment.parent_id.nil?
+      ca = CommentAncestor.create!(
+        :ancestor_id => comment.parent_id,
+        :descendant_id => @comment.id
+      )
+      comment = Comment.find(ca.ancestor_id)
+    end
+
 
       flash[:success] = "Comment posted"
       redirect_to @comment.submission

@@ -26,4 +26,9 @@ class User < ActiveRecord::Base
     self.karma += 1
     self.save
   end
+
+  def remove_karma
+    self.karma -= 1
+    self.save
+  end
 end

@@ -26,10 +26,12 @@ class Submission < ActiveRecord::Base
 
   def upvote(user_id)
     ThreadUpvote.create!(:submission_id => self.id, :user_id => user_id)
+    User.find(user_id).add_karma
   end
 
   def remove_upvote(user_id)
     ThreadUpvote.where(:submission_id => self.id, :user_id => user_id)[0].destroy
+    User.find(user_id).remove_karma
   end
 
   def user_voted?(user_id)

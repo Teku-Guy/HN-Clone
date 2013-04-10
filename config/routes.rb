@@ -4,7 +4,7 @@ Hnclone::Application.routes.draw do
 
   resource :session, :only => [:create, :destroy, :new]
 
-  resources :users, :only => [:new, :create, :destroy]
+  resources :users, :except => [:index]
 
   resources :submissions do
     resources :comments do
