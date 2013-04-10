@@ -7,8 +7,8 @@ Hnclone::Application.routes.draw do
   resources :users, :except => [:index]
 
   resources :submissions do
-    resources :comments do
-      resources :comments
+    resources :comments do #REV: so first one for the direct replies, then another
+      resources :comments #REV: for all children?
     end
     post "upvote"
     post "remove_upvote"
