@@ -1,5 +1,6 @@
 module CommentsHelper
 
+  #NOTE TO SELF. THIS IS AN N+1 QUERY. FIND A WAY TO NOT N+! THIS.!!!!!!!!
   def make_tree(submission_id)
     tree = []
 
@@ -9,6 +10,6 @@ module CommentsHelper
       branch = CommentAncestor.where(:ancestor_id => comment_id)
       tree << branch
     end
-
+    tree
   end
 end
